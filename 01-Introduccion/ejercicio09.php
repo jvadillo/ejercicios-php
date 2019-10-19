@@ -37,7 +37,7 @@ function getDatos($diccionario, $usuario, $tipoDato) {
 ?>
 
 <ul>
-    <li>El nombre de user1 es: <?= getDatos($diccionario, "user1", "nombre") ?></li>
+    <li>El nombre de user1 es: <?php echo getDatos($diccionario, "user1", "nombre") ?></li>
     <li>El apellido de user1 es: <?= getDatos($diccionario, "user1", "apellidos") ?></li>
     <li>El email de user1 es: <?= getDatos($diccionario, "user1", "email") ?></li>
     <li>El nombre de user2 es: <?= getDatos($diccionario, "user2", "nombre") ?></li>

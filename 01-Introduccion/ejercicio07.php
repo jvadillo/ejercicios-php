@@ -19,7 +19,6 @@
     <li>Crea un tercer array que incluya los elementos de los dos arrays.</li>
 </ul>
 
-</p>
 <h4>Solución:</h4>
 <?php
 
@@ -36,19 +35,19 @@ $colores = array('Azul','Verde','Rojo','Naranja');
     array_push($animales, "Zorro");
     ?>
 
-    <li>Añadido animal al array: <?php print_r($animales) ?></li>
+    <li>Añadido animal al array: <pre><?php print_r($animales) ?></pre></li>
 
     <?php
     array_unshift($colores, "Rosa");
     ?>
 
-    <li>Añadido color al array: <?php print_r($colores) ?></li>
+    <li>Añadido color al array: <pre><?php print_r($colores) ?></pre></li>
 
     <?php
     $resultado = array_merge($animales, $colores);
     ?>
 
-    <li>Dos arrays unidos: <?php  print_r($resultado) ?></li>
+    <li>Dos arrays unidos: <pre><?php  print_r($resultado) ?></pre></li>
 </ul>
 
 </body>

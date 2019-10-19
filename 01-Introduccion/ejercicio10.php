@@ -20,7 +20,7 @@ $datos = [5, 2, 9, -10, 24];
 function comparar($datos, $posicion, $numero) {
     if($datos[$posicion] > $numero) {
         $resultado = "mayor";
-    } else if($datos[$posicion] == $numero) {
+    } elseif($datos[$posicion] == $numero) {
         $resultado = "igual";
     } else {
         $resultado = "menor";

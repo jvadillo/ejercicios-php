@@ -20,7 +20,7 @@ $edad = 22;
 $frase = "Mi amigo " . $nombre . " tiene " . $edad . " años.";
 
 // Alternativa:
-$frase = "Mi amigo {$nombre} tiene {$edad} años.";
+$frase = "Mi amigo $nombre tiene $edad años.";
 
 echo $frase;
 ?>
