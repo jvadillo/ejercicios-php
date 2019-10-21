@@ -37,18 +37,23 @@ function contarAparicionesEnArray($listadoNumeros, $numero){
     return $contador;
 }
 
+/**
+ * Comprobar si ya hemos creado el array de números anteriormente.
+ * Si es así, asignamos el valor a la variable $listadoNumeros y contamos
+ * la cantidad de veces que aparece el número enviado en el array.
+ */
 if(isset($_GET["numeros"])) {
     $listadoNumeros = explode(",", $_GET["numeros"]);
     $apariciones = contarAparicionesEnArray($listadoNumeros, intval($_GET["numero"]));
 ?>
 
-<p>
-    El número aparece <?= $apariciones ?> veces en el array.
-</p>
+    <p>
+        El número aparece <?= $apariciones ?> veces en el array.
+    </p>
 
 <?php
 
-} else {
+} else { //Si es la primera vez, creamos el array de números:
     $listadoNumeros = crearArrayNumeros();
 }
 ?>

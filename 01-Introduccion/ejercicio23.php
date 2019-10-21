@@ -33,7 +33,7 @@ function crearFila($nombre, $nota1, $nota2)
     if ($nota2 > 5) {
         $estiloNota2 = "color: red";
     }
-    $notaMedia = $nota1 / $nota2;
+    $notaMedia = round(($nota1+$nota2)/2,2);
     return "<tr>
         <td>{$nombre}</td>
         <td style='{$estiloNota1}'>{$nota1}</td>
@@ -53,10 +53,12 @@ function crearFilas($estudiantes)
 
 <table border="1">
     <thead>
-        <th>Nombre</th>
-        <th>Nota 1</th>
-        <th>Nota 2</th>
-        <th>Nota media</th>
+        <tr>
+            <th>Nombre</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Nota media</th>
+        </tr>
     </thead>
     <tbody>
     <?php crearFilas($estudiantes); ?>

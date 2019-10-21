@@ -52,6 +52,7 @@ if (isset($_POST["usuario"]) && isset($_POST["password"])) {
     }
 }
 
+// Si el usuario ha accedido correctamente, únicamente mostramos el mensaje de bienvenida:
 if ($login) {
     ?>
 
@@ -59,7 +60,7 @@ if ($login) {
 
     <?php
 
-} else {
+} else { // En caso contrario, mostraremos el formulario de acceso y el mensaje de error si lo hubiera.
 
     if ($error) {
         ?>
@@ -87,7 +88,7 @@ if ($login) {
         </fieldset>
     </form>
 
-    <?php
+<?php
 }
 ?>
 
