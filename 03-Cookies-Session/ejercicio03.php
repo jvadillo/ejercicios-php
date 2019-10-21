@@ -10,10 +10,10 @@
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 2: Formularios</h2>
-<h3>Ejercicio 2</h3>
+<h3>Ejercicio 3</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array. En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
+    03. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array. En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
 </p>
 <h4>Solución:</h4>
 
