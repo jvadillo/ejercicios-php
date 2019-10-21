@@ -13,58 +13,66 @@
 <h3>Ejercicio 2</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array. En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
+    02. Crea una aplicación web que simule una calculadora. La calculadora estará representada por un formulario con dos campos numéricos y un desplegable para indicar la operación que se desea realizar (suma, resta, multiplicación o división). La aplicación deberá mostrar el resultado de la operación realizada.
 </p>
 <h4>Solución:</h4>
+<h5>Calculadora</h5>
 
 <?php
 
-function crearArrayNumeros(){
-    $listadoNumeros = [];
-    for($i = 0; $i<20; $i++) {
-        $listadoNumeros[$i] = random_int(1,10);
+function realizarOperacion($operacion, $numero1, $numero2) {
+    switch ($operacion) {
+        case "suma":
+            return $numero1+$numero2;
+        case "resta":
+            return $numero1-$numero2;
+        case "multiplicacion":
+            return $numero1*$numero2;
+        case "division":
+            if($numero2 != 0) {
+                return $numero1/$numero2;
+            } else {
+                return "No es posible dividir entre cero";
+            }
+        default:
+            return "Ha habido un error. Por favor, asegúrese de que introduce una operación válida.";
     }
-    return $listadoNumeros;
 }
 
-function contarAparicionesEnArray($listadoNumeros, $numero){
-    $contador = 0;
-    foreach($listadoNumeros as $num) {
-        if($num == $numero) {
-            $contador++;
-        }
-    }
-    return $contador;
-}
 
-/**
- * Comprobar si ya hemos creado el array de números anteriormente.
- * Si es así, asignamos el valor a la variable $listadoNumeros y contamos
- * la cantidad de veces que aparece el número enviado en el array.
- */
-if(isset($_GET["numeros"])) {
-    $listadoNumeros = explode(",", $_GET["numeros"]);
-    $apariciones = contarAparicionesEnArray($listadoNumeros, intval($_GET["numero"]));
+if (isset($_GET["numero1"]) && isset($_GET["numero2"]) && isset($_GET["operacion"])) {
+    $resultado = realizarOperacion($_GET["operacion"], intval($_GET["numero1"]), intval($_GET["numero2"]));
 ?>
-
-    <p>
-        El número aparece <?= $apariciones ?> veces en el array.
-    </p>
+<p>
+    Último resultado: <?= $resultado ?>
+</p>
 
 <?php
-
-} else { //Si es la primera vez, creamos el array de números:
-    $listadoNumeros = crearArrayNumeros();
 }
 ?>
 
 <form action="ejercicio02.php" method="GET">
-    <label for="numero">Introduce tu número: </label>
-    <input id="numero" name="numero" type="number" required>
-    <input type="hidden" name="numeros" value="<?=  implode(",", $listadoNumeros);?>">
-    <input type="submit" value="¡Probar suerte!">
+    <p>
+        <label for="numero1">Primer número:</label>
+        <input type="number" id="numero1" name="numero1" required>
+    </p>
+    <p>
+        <label for="numero2">Segundo número:</label>
+        <input type="number" id="numero2" name="numero2" required>
+    </p>
+    <p>
+        <label for="operacion">Seleccione la operación deseada:</label>
+        <select id="operacion" name="operacion" required>
+            <option value="suma">Suma</option>
+            <option value="resta">Resta</option>
+            <option value="multiplicacion">Multiplicación</option>
+            <option value="division">División</option>
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="Enviar">
+    </p>
 </form>
-
 
 </body>
 </html>

@@ -13,38 +13,28 @@
 <h3>Ejercicio 1</h3>
 <h4>Enunciado:</h4>
 <p>
-    01. Crea una aplicación web que simule una calculadora. La calculadora estará representada por un formulario con dos campos numéricos y un desplegable para indicar la operación que se desea realizar (suma, resta, multiplicación o división). La aplicación deberá mostrar el resultado de la operación realizada.
+    01. Crea un convertidor de grados Celsius a Farenheit (y viceversa). La aplicación pedirá una cantidad al usuario y la unidad mediante un formulario. Una vez enviado, mostrará el resultado de la conversión realizada. El formulario siempre se mostrará, de forma que el usuario pueda seguir introduciendo valores.
 </p>
 <h4>Solución:</h4>
-<h5>Calculadora</h5>
 
 <?php
 
-function realizarOperacion($operacion, $numero1, $numero2) {
-    switch ($operacion) {
-        case "suma":
-            return $numero1+$numero2;
-        case "resta":
-            return $numero1-$numero2;
-        case "multiplicacion":
-            return $numero1*$numero2;
-        case "division":
-            if($numero2 != 0) {
-                return $numero1/$numero2;
-            } else {
-                return "No es posible dividir entre cero";
-            }
-        default:
-            return "Ha habido un error. Por favor, asegúrese de que introduce una operación válida.";
+function convertirTemperatura($temperatura, $unidad) {
+    if($unidad == 'celsius') {
+        return round(1.8 * $temperatura + 32, 2);
+    } else {
+        return round(($temperatura - 32) / 1.8, 2);
     }
 }
 
 
-if (isset($_GET["numero1"]) && isset($_GET["numero2"]) && isset($_GET["operacion"])) {
-    $resultado = realizarOperacion($_GET["operacion"], intval($_GET["numero1"]), intval($_GET["numero2"]));
+if (isset($_GET["temperatura"]) && isset($_GET["unidad"])) {
+    $temperatura = $_GET["temperatura"];
+    $unidad = $_GET["unidad"];
+    $resultado = convertirTemperatura(intval($temperatura), $unidad);
 ?>
 <p>
-    Último resultado: <?= $resultado ?>
+    <b>Resultado de la conversión (<?= $temperatura ?> <?= $unidad ?>): <?= $resultado ?></b>
 </p>
 
 <?php
@@ -53,20 +43,14 @@ if (isset($_GET["numero1"]) && isset($_GET["numero2"]) && isset($_GET["operacion
 
 <form action="ejercicio01.php" method="GET">
     <p>
-        <label for="numero1">Primer número:</label>
-        <input type="number" id="numero1" name="numero1" required>
+        <label for="temperatura">Introduce la temperatura:</label>
+        <input type="temperatura" id="temperatura" name="temperatura" required>
     </p>
     <p>
-        <label for="numero2">Segundo número:</label>
-        <input type="number" id="numero2" name="numero2" required>
-    </p>
-    <p>
-        <label for="operacion">Seleccione la operación deseada:</label>
-        <select id="operacion" name="operacion" required>
-            <option value="suma">Suma</option>
-            <option value="resta">Resta</option>
-            <option value="multiplicacion">Multiplicación</option>
-            <option value="division">División</option>
+        <label for="unidad">Indica la unidad de la temperatura introducida:</label>
+        <select id="unidad" name="unidad" required>
+            <option value="celsius">Celsius</option>
+            <option value="farenheit">Farenheit</option>
         </select>
     </p>
     <p>
