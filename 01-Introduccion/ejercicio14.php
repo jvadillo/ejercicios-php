@@ -16,7 +16,7 @@
 
 <?php
 
-
+// Estructura de datos
 $agenda = [
     0 => [
         "nombre" => "Amaia",
@@ -60,12 +60,12 @@ function imprimir($agenda) {
 
     $posicion = 0;
     do {
-        echo "<tr>";
-        echo "<td>{$agenda[$posicion]['nombre']}</td>";
-        echo "<td>{$agenda[$posicion]['apellidos']}</td>";
-        echo "<td>{$agenda[$posicion]['telefono']}</td>";
-        echo "<td>{$agenda[$posicion]['email']}</td>";
-        echo "</tr>";
+        echo "<tr>
+            <td>{$agenda[$posicion]['nombre']}</td>
+            <td>{$agenda[$posicion]['apellidos']}</td>
+            <td>{$agenda[$posicion]['telefono']}</td>
+            <td>{$agenda[$posicion]['email']}</td>
+        </tr>";
         $posicion++;
     } while($posicion < count($agenda));
 }

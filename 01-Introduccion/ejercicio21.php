@@ -19,6 +19,12 @@ include 'funciones.php'
 <?php
 
 
+/**
+ * A partir del número indicado recorre todos los números hasta el 1,
+ * sumando solo los que son primos y devuelve el resultado.
+ * @param $numero
+ * @return int resultado de la suma de los números primos.
+ */
 function sumar($numero) {
     $resultado = 0;
     for($posicion = $numero; $posicion > 1; $posicion--) {

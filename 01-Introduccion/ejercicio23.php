@@ -23,24 +23,6 @@ $estudiantes = array(
     "Sergi Vidal" => [7, 6],
     "Ramón Rivas" => [3.5, 6]
 );
-function crearFila($nombre, $nota1, $nota2)
-{
-    $estiloNota1 = "";
-    $estiloNota2 = "";
-    if ($nota1 > 5) {
-        $estiloNota1 = "color: red";
-    }
-    if ($nota2 > 5) {
-        $estiloNota2 = "color: red";
-    }
-    $notaMedia = round(($nota1+$nota2)/2,2);
-    return "<tr>
-        <td>{$nombre}</td>
-        <td style='{$estiloNota1}'>{$nota1}</td>
-        <td style='{$estiloNota2}'>{$nota2}</td>
-        <td>{$notaMedia}</td>
-    </tr>";
-}
 
 function crearFilas($estudiantes)
 {
@@ -48,6 +30,40 @@ function crearFilas($estudiantes)
         echo crearFila($nombre, $notas[0], $notas[1]);
     }
 }
+
+function crearFila($nombre, $nota1, $nota2)
+{
+    $estiloNota1 = "";
+    $estiloNota2 = "";
+    $estiloNotaMedia = "";
+
+    $notaMedia = round(($nota1+$nota2)/2,2);
+
+    if ($nota1 < 5) {
+        $estiloNota1 = "color: red";
+    }
+    if ($nota2 < 5) {
+        $estiloNota2 = "color: red";
+    }
+    if ($notaMedia < 5) {
+        $estiloNotaMedia = "color: red";
+    }
+    return "<tr>
+        <td>{$nombre}</td>
+        <td style='{$estiloNota1}'>{$nota1}</td>
+        <td style='{$estiloNota2}'>{$nota2}</td>
+        <td style='{$estiloNotaMedia}'>{$notaMedia}</td>
+    </tr>";
+}
+
+// Utilizando esta función nos ahorramos todos los IF de la función anterior.
+function calcularEstilo($nota) {
+    if ($nota < 5) {
+        return "color: red";
+    }
+}
+
+
 
 ?>
 

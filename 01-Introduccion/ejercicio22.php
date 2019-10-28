@@ -15,9 +15,10 @@
 
 <?php
 
-function generarArray(){
+// Le pasamos el tamaño como argumento para que sea una función más reutilizable.
+function generarArrayNumerosAleatorios($tamaño = 20){
     $numeros = [];
-    for($i = 0; $i < 20; $i++) {
+    for($i = 0; $i < $tamaño; $i++) {
         $numeros[$i] = random_int(1,999);
     }
     return $numeros;
@@ -43,12 +44,12 @@ function valorMasBajo($numeros) {
     return $valor;
 }
 
-
-$numeros = generarArray();
+$numeros = generarArrayNumerosAleatorios(20);
 
 ?>
 
 <ul>
+    <li>El array generado es: <?php echo implode(',',$numeros) ?></li>
     <li>El valor más bajo del array es <?php echo valorMasBajo($numeros) ?></li>
     <li>El valor más alto del array es <?php echo valorMasAlto($numeros) ?></li>
 </ul>

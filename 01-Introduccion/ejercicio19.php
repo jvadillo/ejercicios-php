@@ -10,12 +10,11 @@
 <h3>Ejercicio 16</h3>
 <h4>Enunciado:</h4>
 <p>
-    16. Modifica el ejercicio número 13 para obtener el mismo resultado empleando una estructura foreach.
+    19. Crea un array asociativo con el nombre de 6 estudiantes y la nota media de cada uno. Recorre el array utilizando la estructura foreach y mostrando una lista con frases con la siguiente estructura: “La nota media de Julen es 6.8”.
 </p>
 <h4>Solución:</h4>
 
 <?php
-
 
 $notas = [
     "Amaia" => 6.5,

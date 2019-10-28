@@ -16,7 +16,7 @@
 
 <?php
 
-
+// Estructura de datos
 $agenda = [
     0 => [
         "nombre" => "Amaia",
@@ -58,13 +58,14 @@ $agenda = [
 
 function imprimir($agenda) {
 
-    foreach ($agenda as $contacto) {
-        echo "<tr>";
-        echo "<td>{$contacto['nombre']}</td>";
-        echo "<td>{$contacto['apellidos']}</td>";
-        echo "<td>{$contacto['telefono']}</td>";
-        echo "<td>{$contacto['email']}</td>";
-        echo "</tr>";
+    foreach ($agenda as $clave => $contacto) {
+        echo "<tr>
+            <td>{$clave}</td>
+            <td>{$contacto['nombre']}</td>
+            <td>{$contacto['apellidos']}</td>
+            <td>{$contacto['telefono']}</td>
+            <td>{$contacto['email']}</td>
+        </tr>";
     }
 }
 
@@ -73,6 +74,7 @@ function imprimir($agenda) {
 
 <table border="1">
     <thead>
+        <th>Clave</th>
         <th>Nombre</th>
         <th>Apellidos</th>
         <th>Teléfono</th>
