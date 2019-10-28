@@ -2,9 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ejercicios PHP</title>
 </head>
 <body>
@@ -13,15 +10,17 @@
 <h3>Ejercicio 2</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array. En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
+    02. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario
+    un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array.
+    En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
 </p>
 <h4>Solución:</h4>
 
 <?php
 
-function crearArrayNumeros(){
+function crearArrayNumeros($tamaño = 20){
     $listadoNumeros = [];
-    for($i = 0; $i<20; $i++) {
+    for($i = 0; $i<$tamaño; $i++) {
         $listadoNumeros[$i] = random_int(1,10);
     }
     return $listadoNumeros;
@@ -47,9 +46,9 @@ if(isset($_GET["numeros"])) {
     $apariciones = contarAparicionesEnArray($listadoNumeros, intval($_GET["numero"]));
 ?>
 
-    <p>
-        El número aparece <?= $apariciones ?> veces en el array.
-    </p>
+<p>
+    El número aparece <?= $apariciones ?> veces en el array.
+</p>
 
 <?php
 
@@ -64,7 +63,6 @@ if(isset($_GET["numeros"])) {
     <input type="hidden" name="numeros" value="<?=  implode(",", $listadoNumeros);?>">
     <input type="submit" value="¡Probar suerte!">
 </form>
-
 
 </body>
 </html>

@@ -2,9 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ejercicios PHP</title>
 </head>
 <body>
@@ -22,8 +19,7 @@
 
 <?php
 
-$login = false;
-$error = false;
+$login = -1;
 
 $usuarios = array(
     "user1" => array(
@@ -38,58 +34,65 @@ $usuarios = array(
     )
 );
 
-if (isset($_POST["usuario"]) && isset($_POST["password"])) {
-    $usuario = $_POST["usuario"];
-    if (array_key_exists($usuario, $usuarios)) {
-        if ($usuarios[$usuario]["password"] == $_POST["password"]) {
-            $login = true;
-        } else {
-            $error = "La contraseña no es correcta.";
-        }
+$ERROR_TYPES = [
+        1 => "La contraseña no es correcta.",
+        2 => "El usuario no existe."
+];
 
+/**
+ * Devuelve 0 si el login es correcto, 1 si la contraseña es incorrecta o 2 si el usuario no existe.
+ *
+ * @param $usuario
+ * @param $password
+ * @param $usuarios
+ * @return int
+ */
+function comprobarLogin($usuario, $password, $usuarios) {
+    if (array_key_exists($usuario, $usuarios)) {
+        if ($usuarios[$usuario]["password"] == $password) {
+            return 0;
+        } else {
+            return 1;
+        }
     } else {
-        $error = "El usuario no existe.";
+        return 2;
     }
 }
 
-// Si el usuario ha accedido correctamente, únicamente mostramos el mensaje de bienvenida:
-if ($login) {
-    ?>
-
-    <p>Bienvenid@, <?= $usuarios[$usuario]["nombre"] ?></p>
-
-    <?php
-
-} else { // En caso contrario, mostraremos el formulario de acceso y el mensaje de error si lo hubiera.
-
-    if ($error) {
-        ?>
-        <p style="color:red;"><?= $error ?></p>
-        <?php
-    }
-
-    ?>
-
-    <form action="./ejercicio04.php" method="post">
+function mostrarFormulario(){
+    echo "<form action='./ejercicio04.php' method='post'>
         <fieldset>
             <legend>Login</legend>
             <p>Introduce tu usuario y contraseña:</p>
             <p>
-                <label for="usuario">Introduce el usuario:</label>
-                <input type="text" id="usuario" name="usuario" required>
+                <label for='usuario'>Introduce el usuario:</label>
+                <input type='text' id='usuario' name='usuario' required>
             </p>
             <p>
-                <label for="password">Introduce la contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <label for='password'>Introduce la contraseña:</label>
+                <input type='password' id='password' name='password' required>
             <p>
             <p>
-                <input type="submit" value="Enviar">
+                <input type='submit' value='Enviar'>
             </p>
         </fieldset>
-    </form>
-
-<?php
+    </form>";
 }
+
+if (isset($_POST["usuario"]) && isset($_POST["password"])) {
+    $login = comprobarLogin($_POST["usuario"], $_POST["password"], $usuarios);
+}
+
+// Si el usuario ha accedido correctamente, únicamente mostramos el mensaje de bienvenida:
+if ($login == 0) {
+    echo "<p>Bienvenid@, {$usuarios[$_POST['usuario']]['nombre']}</p>";
+} else {
+    if($login != -1) { // Si no es ni 0 ni -1, ha ocurrido un error.
+        echo "<p style='color:red;'>{$ERROR_TYPES[$login]}</p>";
+    }
+    mostrarFormulario();
+}
+
 ?>
 
 </body>

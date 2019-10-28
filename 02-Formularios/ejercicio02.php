@@ -13,7 +13,10 @@
 <h3>Ejercicio 2</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Crea una aplicación web que simule una calculadora. La calculadora estará representada por un formulario con dos campos numéricos y un desplegable para indicar la operación que se desea realizar (suma, resta, multiplicación o división). La aplicación deberá mostrar el resultado de la operación realizada.
+    02. Crea una aplicación web que simule una calculadora. La calculadora estará representada
+    por un formulario con dos campos numéricos y un desplegable para indicar la operación que se
+    desea realizar (suma, resta, multiplicación o división). La aplicación deberá mostrar el
+    resultado de la operación realizada.
 </p>
 <h4>Solución:</h4>
 <h5>Calculadora</h5>

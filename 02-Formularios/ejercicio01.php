@@ -13,7 +13,9 @@
 <h3>Ejercicio 1</h3>
 <h4>Enunciado:</h4>
 <p>
-    01. Crea un convertidor de grados Celsius a Farenheit (y viceversa). La aplicación pedirá una cantidad al usuario y la unidad mediante un formulario. Una vez enviado, mostrará el resultado de la conversión realizada. El formulario siempre se mostrará, de forma que el usuario pueda seguir introduciendo valores.
+    01. Crea un convertidor de grados Celsius a Farenheit (y viceversa). La aplicación pedirá una cantidad al usuario
+    y la unidad mediante un formulario. Una vez enviado, mostrará el resultado de la conversión realizada. El formulario
+    siempre se mostrará, de forma que el usuario pueda seguir introduciendo valores.
 </p>
 <h4>Solución:</h4>
 
@@ -28,7 +30,7 @@ function convertirTemperatura($temperatura, $unidad) {
 }
 
 
-if (isset($_GET["temperatura"]) && isset($_GET["unidad"])) {
+if (isset($_GET["temperatura"]) && $_GET["temperatura"]!= '' && isset($_GET["unidad"])) {
     $temperatura = $_GET["temperatura"];
     $unidad = $_GET["unidad"];
     $resultado = convertirTemperatura(intval($temperatura), $unidad);
@@ -38,13 +40,15 @@ if (isset($_GET["temperatura"]) && isset($_GET["unidad"])) {
 </p>
 
 <?php
+} else {
+    echo "<b>Introduce una temperatura válida:</b>";
 }
 ?>
 
 <form action="ejercicio01.php" method="GET">
     <p>
         <label for="temperatura">Introduce la temperatura:</label>
-        <input type="temperatura" id="temperatura" name="temperatura" required>
+        <input type="number" id="temperatura" name="temperatura" required>
     </p>
     <p>
         <label for="unidad">Indica la unidad de la temperatura introducida:</label>
