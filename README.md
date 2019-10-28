@@ -1,2 +1,2 @@
 # ejercicios-php
-Resolución de ejercicios PHP
+Resolución de ejercicios PHP.
