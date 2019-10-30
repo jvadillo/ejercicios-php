@@ -1,26 +1,6 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejercicios PHP</title>
-</head>
-<body>
-<h1>Soluciones de ejercicios PHP</h1>
-<h2>Tema 2: Formularios</h2>
-<h3>Ejercicio 4</h3>
-<h4>Enunciado:</h4>
-<p>
-    04. Crea una pantalla de login con dos campos: usuario y contraseña. El programa deberá validar los datos de acceso
-    contra un diccionario de datos como el de la imagen. El programa deberá mostrar un mensaje de bienvenida con su
-    nombre y apellidos en caso de que los datos sean correctos.
-    También indicará si el usuario introducido no existe o si la contraseña introducida es incorrecta.
-</p>
-<h4>Solución:</h4>
-
 <?php
 
-$login = -1;
-
+// Datos de acceso de los usuarios:
 $usuarios = array(
     "user1" => array(
         "nombre" => 'Ane',
@@ -34,9 +14,10 @@ $usuarios = array(
     )
 );
 
+// Codigos de los errores. En función del error se muestra su mensaje correspondiente.
 $ERROR_TYPES = [
-        1 => "La contraseña no es correcta.",
-        2 => "El usuario no existe."
+    1 => "La contraseña no es correcta.",
+    2 => "El usuario no existe."
 ];
 
 /**
@@ -79,6 +60,32 @@ function mostrarFormulario(){
     </form>";
 }
 
+
+?>
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios PHP</title>
+</head>
+<body>
+<h1>Soluciones de ejercicios PHP</h1>
+<h2>Tema 2: Formularios</h2>
+<h3>Ejercicio 4</h3>
+<h4>Enunciado:</h4>
+<p>
+    04. Crea una pantalla de login con dos campos: usuario y contraseña. El programa deberá validar los datos de acceso
+    contra un diccionario de datos como el de la imagen. El programa deberá mostrar un mensaje de bienvenida con su
+    nombre y apellidos en caso de que los datos sean correctos.
+    También indicará si el usuario introducido no existe o si la contraseña introducida es incorrecta.
+</p>
+<h4>Solución:</h4>
+
+<?php
+
+$login = -1; // Utilizamos esta variable para almacenar el estado (login correcto, error)
+
 if (isset($_POST["usuario"]) && isset($_POST["password"])) {
     $login = comprobarLogin($_POST["usuario"], $_POST["password"], $usuarios);
 }
@@ -87,7 +94,7 @@ if (isset($_POST["usuario"]) && isset($_POST["password"])) {
 if ($login == 0) {
     echo "<p>Bienvenid@, {$usuarios[$_POST['usuario']]['nombre']}</p>";
 } else {
-    if($login != -1) { // Si no es ni 0 ni -1, ha ocurrido un error.
+    if($login != -1) {
         echo "<p style='color:red;'>{$ERROR_TYPES[$login]}</p>";
     }
     mostrarFormulario();

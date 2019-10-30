@@ -113,19 +113,17 @@ function imprimir($agenda) {
 
 ?>
 
-<ul>
-    <table border="1">
-        <thead>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Teléfono</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            <?php imprimir($agenda) ?>
-        </tbody>
-    </table>
-</ul>
+<table border="1">
+    <thead>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        <?php imprimir($agenda) ?>
+    </tbody>
+</table>
 
 </body>
 </html>

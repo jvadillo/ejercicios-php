@@ -1,6 +1,9 @@
 <?php
 
 function esPrimo($numero) {
+    if($numero == 1) {
+        return false;
+    }
     $contador = 0;
     for($i = 2; $i <= $numero; $i++) {
         if($numero%$i == 0) {

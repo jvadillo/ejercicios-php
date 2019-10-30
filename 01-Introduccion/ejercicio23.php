@@ -33,26 +33,14 @@ function crearFilas($estudiantes)
 
 function crearFila($nombre, $nota1, $nota2)
 {
-    $estiloNota1 = "";
-    $estiloNota2 = "";
-    $estiloNotaMedia = "";
 
     $notaMedia = round(($nota1+$nota2)/2,2);
 
-    if ($nota1 < 5) {
-        $estiloNota1 = "color: red";
-    }
-    if ($nota2 < 5) {
-        $estiloNota2 = "color: red";
-    }
-    if ($notaMedia < 5) {
-        $estiloNotaMedia = "color: red";
-    }
     return "<tr>
         <td>{$nombre}</td>
-        <td style='{$estiloNota1}'>{$nota1}</td>
-        <td style='{$estiloNota2}'>{$nota2}</td>
-        <td style='{$estiloNotaMedia}'>{$notaMedia}</td>
+        <td style='{calcularEstilo($nota1)}'>{$nota1}</td>
+        <td style='{calcularEstilo($nota2)}'>{$nota2}</td>
+        <td style='{calcularEstilo($notaMedia)}'>{$notaMedia}</td>
     </tr>";
 }
 
@@ -61,6 +49,7 @@ function calcularEstilo($nota) {
     if ($nota < 5) {
         return "color: red";
     }
+    return "color:black";
 }
 
 

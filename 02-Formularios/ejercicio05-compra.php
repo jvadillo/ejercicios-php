@@ -1,6 +1,7 @@
 <?php
 require_once 'ejercicio05-datos.php';
 
+/*** FUNCIONES ***/
 function calcularImporte($productos){
     $total = 0;
     foreach ($productos as $id => $producto){
@@ -20,6 +21,9 @@ function imprimirDetalle($productos) {
     }
     echo "</ul>";
 }
+
+/*** Fin: FUNCIONES ***/
+
 ?>
 
 <!doctype html>

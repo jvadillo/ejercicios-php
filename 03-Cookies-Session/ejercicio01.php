@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_GET["texto"])) {
-    setcookie("textoAlmacenado", $_GET["texto"]);
+    setcookie("usuario", $_GET["texto"], time() + 7*24*60*60);
 }
 
 ?>
@@ -9,9 +9,6 @@ if(isset($_GET["texto"])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ejercicios PHP</title>
 </head>
 <body>
@@ -20,24 +17,25 @@ if(isset($_GET["texto"])) {
 <h3>Ejercicio 1</h3>
 <h4>Enunciado:</h4>
 <p>
-    01. Crea una página que tenga un formulario con un textarea. La aplicación guardará en una cookie el texto introducido y mostrará el último valor almacenado siempre que la cookie contenga algún valor.
-</p>
+    01. Crea una página que tenga un formulario con un campo de texto en el que poder almacenar un nombre de usuario.
+    La aplicación guardará el texto introducido en una cookie (sin especificar la duración) de nombre “usuario” y mostrará
+    el último valor almacenado siempre que la cookie contenga algún valor.</p>
 <h4>Solución:</h4>
 
 <?php
 
-if(isset($_COOKIE["textoAlmacenado"])) {
-    echo "<p>Valor almacenado: " . $_COOKIE["textoAlmacenado"] . "</p>";
+if(isset($_COOKIE["usuario"])) {
+    echo "<p>Usuario almacenado: " . $_COOKIE["usuario"] . "</p>";
 } else {
-    echo "<p>No hay ningún valor almacenado</p>";
+    echo "<p>No hay ningún usuario almacenado</p>";
 }
 ?>
 
 
 <form action="ejercicio01.php" method="GET">
     <label for="texto">Introduce el texto que deseas almacenar: </label>
-    <textarea name="texto" id="texto"></textarea>
-    <input type="submit" value="Almacenar">
+    <input type="text" name="texto"></input>
+    <input type="submit" value="Guardar">
 </form>
 
 

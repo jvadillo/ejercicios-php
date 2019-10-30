@@ -1,11 +1,11 @@
 <?php
 
 if(isset($_GET["texto"])) {
-    setcookie("textoAlmacenado", $_GET["texto"]);
+    setcookie("usuario", $_GET["texto"]);
 }
 
 if(isset($_GET["accion"])&& $_GET["accion"] == 'borrarCookie') {
-    setcookie("textoAlmacenado", null, -1);
+    setcookie("usuario", null, -1);
 }
 
 ?>
@@ -13,9 +13,6 @@ if(isset($_GET["accion"])&& $_GET["accion"] == 'borrarCookie') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ejercicios PHP</title>
 </head>
 <body>
@@ -30,19 +27,17 @@ if(isset($_GET["accion"])&& $_GET["accion"] == 'borrarCookie') {
 
 <?php
 
-if(isset($_COOKIE["textoAlmacenado"])) {
-    echo "<p>Valor almacenado: " . $_COOKIE["textoAlmacenado"] . "</p>";
+if(isset($_COOKIE["usuario"])) {
+    echo "<p>Usuario almacenado: " . $_COOKIE["usuario"] . "</p>";
 } else {
     echo "<p>No hay ningún valor almacenado</p>";
 }
 ?>
 
 <form action="ejercicio02.php" method="GET">
-    <P>
-        <label for="texto">Introduce el texto que deseas almacenar: </label>
-        <textarea name="texto" id="texto"></textarea>
-    </P>
-    <input type="submit" value="Almacenar">
+    <label for="texto">Introduce el texto que deseas almacenar: </label>
+    <input type="text" name="texto"></input>
+    <input type="submit" value="Guardar">
 </form>
 <a href="ejercicio02.php?accion=borrarCookie">BORRAR COOKIE</a>
 

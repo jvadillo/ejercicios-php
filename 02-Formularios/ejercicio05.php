@@ -1,12 +1,39 @@
 <?php
 require_once 'ejercicio05-datos.php';
+
+/*** FUNCIONES ***/
+function generarTablaProductos($productos) {
+    echo "
+        <table class='table'>
+            <thead>
+                <tr><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Cantidad</th></tr>
+            </thead>
+            <tbody>
+    ";
+    foreach ($productos as $id => $producto) {
+        crearFilaProducto($id, $producto);
+    }
+    echo "</tbody></table>";
+}
+
+function crearFilaProducto($id, $producto) {
+    echo "<tr>
+            <td>{$producto['nombre']}</td>
+            <td>{$producto['descripción']}</td>
+            <td>{$producto['precio']}</td>
+            <td><input type='number' name='{$id}' value='0' required></td>
+        </tr>";
+}
+/*** Fin: FUNCIONES ***/
 ?>
+
 
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Ejercicios PHP</title>
+    <!-- Añadir Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
@@ -27,32 +54,6 @@ require_once 'ejercicio05-datos.php';
     o una unidad del mismo).
 </p>
 <h4>Solución:</h4>
-
-<?php
-
-function generarTablaProductos($productos) {
-    echo "
-        <table class='table'>
-            <thead>
-                <tr><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Cantidad</th></tr>
-            </thead>
-            <tbody>
-    ";
-    foreach ($productos as $id => $producto) {
-        crearProducto($id, $producto);
-    }
-    echo "</tbody></table>";
-}
-
-function crearProducto($id, $producto) {
-    echo "<tr>
-            <td>{$producto['nombre']}</td>
-            <td>{$producto['descripción']}</td>
-            <td>{$producto['precio']}</td>
-            <td><input type='number' name='{$id}' value='0' required></td>
-        </tr>";
-}
-?>
 
 <h2>Catálogo de productos</h2>
 <form action="ejercicio05-compra.php" type="get">
