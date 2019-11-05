@@ -17,11 +17,10 @@ if(isset($_GET["idioma"])) {
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 3: Cookies y sesiones</h2>
-<h3>Ejercicio 2</h3>
+<h3>Ejercicio 3</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Añade a la aplicación anterior un botón o enlace para borrar la cookie..
-</p>
+    03. Crea una página que tenga un 'select' con dos opciones: “Euskera” y “Castellano”. La aplicación guardará el valor indicado en una cookie de nombre “idioma” (tendrá 1 minuto de duración) y mostrará el último valor almacenado siempre que la cookie contenga algún valor.</p>
 <h4>Solución:</h4>
 
 <?php

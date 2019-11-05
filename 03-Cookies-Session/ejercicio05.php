@@ -1,22 +1,74 @@
 <?php
-require_once 'ejercicio05-datos.php';
 session_start();
 
-function inicializarCesta(){
-    if(!isset($_SESSION["productosCesta"])){
-        $_SESSION["productosCesta"] = array();
+// Datos de acceso de los usuarios:
+$usuarios = array(
+    "user1" => array(
+        "nombre" => 'Ane',
+        "apellidos" => 'López',
+        "password" => '123Abc'
+    ),
+    "user2" => array(
+        "nombre" => 'Amaia',
+        "apellidos" => 'Otsoa',
+        "password" => '456Xyz'
+    )
+);
+
+// Codigos de los errores. En función del error se muestra su mensaje correspondiente.
+$ERROR_TYPES = [
+    1 => "La contraseña no es correcta.",
+    2 => "El usuario no existe."
+];
+
+/**
+ * Devuelve 0 si el login es correcto, 1 si la contraseña es incorrecta o 2 si el usuario no existe.
+ *
+ * @param $usuario
+ * @param $password
+ * @param $usuarios
+ * @return int
+ */
+function comprobarLogin($usuario, $password, $usuarios) {
+    if (array_key_exists($usuario, $usuarios)) {
+        if ($usuarios[$usuario]["password"] == $password) {
+            $_SESSION["usuario"] = $usuario;
+            return 0;
+        } else {
+            return 1;
+        }
+    } else {
+        return 2;
     }
 }
 
-inicializarCesta();
-
-if(isset($_GET["idProducto"])) {
-    $idProductoComprado = $_GET["idProducto"];
-    array_push($_SESSION["productosCesta"], $idProductoComprado);
+function mostrarFormulario(){
+    echo "<form action='./ejercicio05.php' method='post'>
+        <fieldset>
+            <legend>Login</legend>
+            <p>Introduce tu usuario y contraseña:</p>
+            <p>
+                <label for='usuario'>Introduce el usuario:</label>
+                <input type='text' id='usuario' name='usuario' required>
+            </p>
+            <p>
+                <label for='password'>Introduce la contraseña:</label>
+                <input type='password' id='password' name='password' required>
+            <p>
+            <p>
+                <input type='submit' value='Enviar'>
+            </p>
+        </fieldset>
+    </form>";
 }
 
-if(isset($_GET["accion"])) {
-   unset($_SESSION["productosCesta"]);
+if(!isset($_SESSION["login"]) || isset($_GET["accion"])) {
+    $_SESSION["login"] = -1; // Utilizamos esta variable para almacenar el estado (login correcto, error)
+    $_SESSION["usuario"] = "";
+}
+
+if (isset($_POST["usuario"]) && isset($_POST["password"])) {
+    $_SESSION["login"] = comprobarLogin($_POST["usuario"], $_POST["password"], $usuarios);
 }
 
 ?>
@@ -26,12 +78,6 @@ if(isset($_GET["accion"])) {
 <head>
     <meta charset="UTF-8">
     <title>Ejercicios PHP</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        body {
-            padding: 15px;
-        }
-    </style>
 </head>
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
@@ -39,67 +85,30 @@ if(isset($_GET["accion"])) {
 <h3>Ejercicio 5</h3>
 <h4>Enunciado:</h4>
 <p>
-    Desarrolla una tienda online con un catálogo de productos y un carrito de la compra.
-    Cada producto tendrá la siguiente información: nombre, descripción y precio (puedes
-    almacenar otra información extra que te sirva de ayuda, como un ID). Se podrán adquirir
-    tantas unidades de cada producto como se desee (también podrá eliminarse un producto añadido
-    o una unidad del mismo).
+    05. Desarrolla una página de login con un formulario compuesto por los
+    campos de usuario y contraseña. La aplicación no dejará continuar hasta
+    que se inicie sesión con un nombre de usuario y contraseña correctos
+    (a comprobar contra un array asociativo). Una vez el usuario haya accedido
+    correctamente, en lugar del formulario de acceso la aplicación mostrará un mensaje
+    de bienvenida y un enlace para cerrar sesión. Al hacer click en el enlace para
+    cerrar sesión, la aplicación destruirá información de la sesión almacenada.
 </p>
 <h4>Solución:</h4>
-<hr>
+
 <?php
-function generarCestaCompra($productosComprados, $catalogoProductos){
-    if($productosComprados > 0) {
-        $precioTotal = 0;
-        echo "<ul>";
-        foreach ($productosComprados as $idProducto) {
-            //crearElementoCesta($key, $producto);
-            crearElementoCesta($idProducto, $catalogoProductos);
-            $precioTotal += $catalogoProductos[$idProducto]['precio'];
-        }
-        echo "</ul>";
-        echo "<h5>Precio total: " . $precioTotal . "</h5>";
-        echo "<a href='ejercicio05.php?accion=comprar' class='btn btn-primary'>Comprar</a>";
-    }
-}
 
-function crearElementoCesta($idProducto, $catalogoProductos){
-    echo "<li>{$catalogoProductos[$idProducto]['nombre']} </li>";
-}
-
-function generarTablaProductos($productos) {
-    echo "
-        <table class='table'>
-            <thead>
-                <tr><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Cantidad</th></tr>
-            </thead>
-            <tbody>
-    ";
-    foreach ($productos as $id => $producto) {
-        crearProducto($id, $producto);
-    }
-    echo "</tbody></table>";
-}
-
-function crearProducto($id, $producto) {
-    echo "<tr>
-            <td>{$producto['nombre']}</td>
-            <td>{$producto['descripción']}</td>
-            <td>{$producto['precio']}</td>
-            <td><a href='ejercicio05.php?idProducto={$id}'>Comprar</a></td>
-        </tr>";
-}
-?>
-
-<h4>Cesta de la compra</h4>
-<?php if(isset($_SESSION["productosCesta"])) {
-    generarCestaCompra($_SESSION["productosCesta"], $productos);
+// Si el usuario ha accedido correctamente, únicamente mostramos el mensaje de bienvenida:
+if ($_SESSION["login"] == 0) {
+    echo "<p>Bienvenid@, {$usuarios[$_SESSION['usuario']]['nombre']}</p>";
+    echo "<a href='ejercicio05.php?accion=cerrar'>Cerrar sesión</a>";
 } else {
-    echo "No hay productos en la cesta";
+    if($_SESSION["login"] != -1) {
+        echo "<p style='color:red;'>{$ERROR_TYPES[$_SESSION['login']]}</p>";
+    }
+    mostrarFormulario();
 }
+
 ?>
-<h4 class="mt-4">Catálogo de productos</h4>
-<?php generarTablaProductos($productos) ?>
 
 </body>
 </html>

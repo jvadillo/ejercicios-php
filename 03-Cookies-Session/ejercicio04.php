@@ -1,70 +1,91 @@
+<?php
+// Iniciar o cargar sesión
+session_start();
+
+/*** FUNCIONES ***/
+function inicializarLista(){
+    if(!isset($_SESSION["listaPersonas"])){
+        $_SESSION["listaPersonas"] = array();
+    }
+}
+
+function realizarAccion($accion){
+    switch ($accion) {
+        case "insertar":
+            if(isset($_GET["persona"])) {
+                $nombrePersona = $_GET["persona"];
+                array_push($_SESSION["listaPersonas"], $nombrePersona);
+            }
+            break;
+        case "vaciar":
+            unset($_SESSION["listaPersonas"]);
+            break;
+    }
+}
+
+function generarListaPersonas($personas){
+    if($personas > 0) {
+        echo "<ul>";
+        foreach ($personas as $persona) {
+            crearElementoLista($persona);
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>No hay asistentes</p>";
+    }
+}
+
+function crearElementoLista($texto){
+    echo "<li>{$texto}</li>";
+}
+
+/*** INICIO DE LA APLICACION ***/
+
+if(isset($_GET["accion"])) {
+    $accion = $_GET["accion"];
+    realizarAccion($accion);
+}
+inicializarLista();
+
+?>
+
 <!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ejercicios PHP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 2: Formularios</h2>
-<h3>Ejercicio 3</h3>
+<h3>Ejercicio 4</h3>
 <h4>Enunciado:</h4>
 <p>
-    03. Crea un array con 20 números aleatorios entre el 1 y el 10. El usuario introducirá en el formulario un número y al darle a “Enviar” la aplicación comprobará cuántas veces aparece el número introducido en el array. En caso contrario mostrará el mensaje: “Inténtelo de nuevo”.
+    04. Crea  una  aplicación  de  control  de  asistencia para un evento.
+    La aplicación tendrá que mostrar la lista de personas (el nombre de cada una) que
+    han acudido al evento. Tendrá un campo de texto para escribir  el  nombre  de  la
+    persona  y  así  añadir personas a la lista. La lista se almacenará en sesión, y
+    existirá un botón que borre la lista completa
 </p>
 <h4>Solución:</h4>
+<hr>
 
-<?php
-
-function crearArrayNumeros(){
-    $listadoNumeros = [];
-    for($i = 0; $i<20; $i++) {
-        $listadoNumeros[$i] = random_int(1,10);
-    }
-    return $listadoNumeros;
-}
-
-function contarAparicionesEnArray($listadoNumeros, $numero){
-    $contador = 0;
-    foreach($listadoNumeros as $num) {
-        if($num == $numero) {
-            $contador++;
-        }
-    }
-    return $contador;
-}
-
-/**
- * Comprobar si ya hemos creado el array de números anteriormente.
- * Si es así, asignamos el valor a la variable $listadoNumeros y contamos
- * la cantidad de veces que aparece el número enviado en el array.
- */
-if(isset($_GET["numeros"])) {
-    $listadoNumeros = explode(",", $_GET["numeros"]);
-    $apariciones = contarAparicionesEnArray($listadoNumeros, intval($_GET["numero"]));
-?>
-
-    <p>
-        El número aparece <?= $apariciones ?> veces en el array.
-    </p>
-
-<?php
-
-} else { //Si es la primera vez, creamos el array de números:
-    $listadoNumeros = crearArrayNumeros();
-}
-?>
-
-<form action="ejercicio03.php" method="GET">
-    <label for="numero">Introduce tu número: </label>
-    <input id="numero" name="numero" type="number" required>
-    <input type="hidden" name="numeros" value="<?=  implode(",", $listadoNumeros);?>">
-    <input type="submit" value="¡Probar suerte!">
+<h4>Lista de asistentes</h4>
+<?php generarListaPersonas($_SESSION["listaPersonas"]) ?>
+<br>
+<h5>Añadir asistente</h5>
+<form action="ejercicio04.php" method="get">
+    <input type="text" name="persona">
+    <input type="hidden" name="accion" value="insertar">
+    <input type="submit" value="Añadir">
 </form>
-
-
+<br>
+<a href="ejercicio04.php?accion=vaciar">Vaciar lista</a>
 </body>
 </html>
