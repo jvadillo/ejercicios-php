@@ -21,7 +21,7 @@ if(isset($_GET["accion"])&& $_GET["accion"] == 'borrarCookie') {
 <h3>Ejercicio 2</h3>
 <h4>Enunciado:</h4>
 <p>
-    02. Añade a la aplicación anterior un botón o enlace para borrar la cookie..
+    02. Añade a la aplicación anterior un botón o enlace para borrar la cookie.
 </p>
 <h4>Solución:</h4>
 
