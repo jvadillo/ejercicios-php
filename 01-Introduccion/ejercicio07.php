@@ -7,48 +7,22 @@
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 1: Introducción a PHP</h2>
-<h3>Ejercicio 8</h3>
+<h3>Ejercicio 7</h3>
 <h4>Enunciado:</h4>
-<p>
-    07. Crea dos arrays, uno con 4 tipos de animales ($animales) y otro con 4 nombres de colores ($colores).
+<p>07. ¿Cómo mejorarías el ejercicio anterior para que la función sea más reutilizable? Piénsalo bien y modifica la función.
 </p>
-<ul>
-    <li>Calcula el número de elementos de cada array.</li>
-    <li>Añade un elemento al final del array $animales utilizando una función.</li>
-    <li>Añade un elemento al principio del array $colores utilizando una función.</li>
-    <li>Crea un tercer array que incluya los elementos de los dos arrays.</li>
-</ul>
-
 <h4>Solución:</h4>
+
 <?php
+function multiplicar($a, $b){
+    return $a*$b;
 
-$animales = array('Tigre','Perro','Gato','Oso');
-$colores = array('Azul','Verde','Rojo','Naranja');
-
+}
+$numeroA = $_GET["a"];
+$numeroB = $_GET["b"];
+$resultado = multiplicar($numeroA, $numeroB);
+echo "<p>Resultado de $numeroA x $numeroB = $resultado</p>";
 ?>
-
-<ul>
-    <li>Tamaño primer array: <?php echo count($animales) ?></li>
-    <li>Tamaño primer array: <?php echo count($colores) ?></li>
-
-    <?php
-    array_push($animales, "Zorro");
-    ?>
-
-    <li>Añadido animal al array: <pre><?php print_r($animales) ?></pre></li>
-
-    <?php
-    array_unshift($colores, "Rosa");
-    ?>
-
-    <li>Añadido color al array: <pre><?php print_r($colores) ?></pre></li>
-
-    <?php
-    $resultado = array_merge($animales, $colores);
-    ?>
-
-    <li>Dos arrays unidos: <pre><?php  print_r($resultado) ?></pre></li>
-</ul>
 
 </body>
 </html>

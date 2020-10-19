@@ -7,10 +7,10 @@
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 1: Introducción a PHP</h2>
-<h3>Ejercicio 26</h3>
+<h3>Ejercicio 27</h3>
 <h4>Enunciado:</h4>
 <p>
-    26. Crea un array con marcas de coches y una función que imprima por pantalla una lista con todos los nombres utilizando la sentencia do-while.
+    27. Crea un array con el nombre de 8 grupos de música y una función que imprima por pantalla todos los elementos utilizando la estructura foreach.
 </p>
 <h4>Solución:</h4>
 

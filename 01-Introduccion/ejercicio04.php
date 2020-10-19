@@ -9,20 +9,19 @@
 <h2>Tema 1: Introducción a PHP</h2>
 <h3>Ejercicio 4</h3>
 <h4>Enunciado:</h4>
-<p>
-    04. Escribe una función que reciba como parámetro dos cadenas de texto y devuelva la concatenación de dichas cadenas. Muestra el resultado obtenido por pantalla.</p>
+<p>Modifica el programa 02 para que recoja el nombre y la edad desde la URL.
 </p>
 <h4>Solución:</h4>
 <?php
+$nombre = $_GET["nombre"];
+$edad = $_GET["edad"];
 
-function concatenar($texto1, $texto2) {
-    return $texto1 . $texto2;
-}
+$frase = "Mi amigo " . $nombre . " tiene " . $edad . " años.";
+
+// Alternativa:
+$frase = "Mi amigo $nombre tiene $edad años.";
+
+echo $frase;
 ?>
-
-<ul>
-    <li>Concatenar "¿Hola qué " y "tal estás?": <b><?php echo concatenar("¿Hola qué ","tal estás?") ?></b></li>
-</ul>
-
 </body>
 </html>

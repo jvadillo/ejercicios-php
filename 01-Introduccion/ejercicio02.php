@@ -7,36 +7,22 @@
 <body>
 <h1>Soluciones de ejercicios PHP</h1>
 <h2>Tema 1: Introducción a PHP</h2>
-<h3>Ejercicio 2</h3>
+<h3>Ejercicio 1</h3>
 <h4>Enunciado:</h4>
-<p>
-    02. Crea dos variables, a y b con los valores 5 y 8 respectivamente. Almacena el resultado de las siguientes operaciones en una nueva variable y muéstrala por pantalla.
-</p>
-<ul>
-    <li>Resta de a y b</li>
-    <li>División de a entre b</li>
-    <li>Resultado de a mayor que b</li>
-    <li>Resultado de a menor o igual que b</li>
-</ul>
-
+<p>Crea dos variables llamadas nombre y edad. La variables nombre tendrá el valor “Mikel” y la variable edad tendrá asignado el valor 22. A continuación crea una página que muestre lo siguiente:
+    Mi amigo Mikel tiene 22 años.
 </p>
 <h4>Solución:</h4>
 <?php
-$a = 5;
-$b = 8;
+$nombre = "Mikel";
+$edad = 22;
 
-$resta = $a - $b;
-$division = $a / $b;
-$mayor = $a>$b;
-$menorIgual = $a <= $b;
+$frase = "Mi amigo " . $nombre . " tiene " . $edad . " años.";
+
+// Alternativa:
+$frase = "Mi amigo $nombre tiene $edad años.";
+
+echo $frase;
 ?>
-
-<ul>
-    <li>Resta de a y b: <?php echo $resta ?></li>
-    <li>División de a entre b: <?php echo $division ?></li>
-    <li>Resultado de a mayor que b: <?php echo var_export($mayor) ?></li>
-    <li>Resultado de a menor o igual que b: <?php echo var_export($menorIgual) ?></li>
-</ul>
-
 </body>
 </html>
