@@ -1,12 +1,11 @@
 <?php
 function concatenar($a, $b = "anónimo"){
-    return $a.$b;
-
+    return $a. ' '.$b;
 }
 
 $textoA = $_GET["textoA"];
 $textoB = $_GET["textoB"];
-$frase = concatenar($textoA);
+$frase = concatenar($textoA, $textoB);
 
-require "ejercicio11.view.php";
+include "ejercicio11.view.php";
 

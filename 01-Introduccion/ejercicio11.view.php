@@ -13,9 +13,7 @@
 </p>
 <h4>Solución:</h4>
 
-<?php
-echo "<p>Frase = $frase</p>";
-?>
+<p>Frase = <?=$frase ?></p>
 
 </body>
 </html>

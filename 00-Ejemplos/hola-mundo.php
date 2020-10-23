@@ -11,6 +11,10 @@
 <?php
     echo "<p>Hola, Mundo!</p>";
 ?>
+<p>Aquí va el siguiente codigo;</p>
+<?php
+echo "<p>Hola, Mundo!</p>";
+?>
 </body>
 </html>
 
