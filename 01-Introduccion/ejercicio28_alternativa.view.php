@@ -14,11 +14,12 @@
 </p>
 <h4>Solución:</h4>
 
-
+<h2>Bienvenido</h2>
+<p>El usuario conectado es: <?= $nombre_usuario ?></p>
 <ul>
 <?php foreach ($marcas as $elemento) {?>
     <li><?= $elemento ?></li>
-<?php } ?>
+<?php }?>
 </ul>
 
 </body>

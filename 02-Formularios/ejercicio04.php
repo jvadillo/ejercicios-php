@@ -40,67 +40,21 @@ function comprobarLogin($usuario, $password, $usuarios) {
     }
 }
 
-function mostrarFormulario(){
-    echo "<form action='./ejercicio04.php' method='post'>
-        <fieldset>
-            <legend>Login</legend>
-            <p>Introduce tu usuario y contraseña:</p>
-            <p>
-                <label for='usuario'>Introduce el usuario:</label>
-                <input type='text' id='usuario' name='usuario' required>
-            </p>
-            <p>
-                <label for='password'>Introduce la contraseña:</label>
-                <input type='password' id='password' name='password' required>
-            <p>
-            <p>
-                <input type='submit' value='Enviar'>
-            </p>
-        </fieldset>
-    </form>";
-}
-
-
-?>
-
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejercicios PHP</title>
-</head>
-<body>
-<h1>Soluciones de ejercicios PHP</h1>
-<h2>Tema 2: Formularios</h2>
-<h3>Ejercicio 4</h3>
-<h4>Enunciado:</h4>
-<p>
-    04. Crea una pantalla de login con dos campos: usuario y contraseña. El programa deberá validar los datos de acceso
-    contra un diccionario de datos como el de la imagen. El programa deberá mostrar un mensaje de bienvenida con su
-    nombre y apellidos en caso de que los datos sean correctos.
-    También indicará si el usuario introducido no existe o si la contraseña introducida es incorrecta.
-</p>
-<h4>Solución:</h4>
-
-<?php
-
-$login = -1; // Utilizamos esta variable para almacenar el estado (login correcto, error)
-
 if (isset($_POST["usuario"]) && isset($_POST["password"])) {
     $login = comprobarLogin($_POST["usuario"], $_POST["password"], $usuarios);
-}
-
-// Si el usuario ha accedido correctamente, únicamente mostramos el mensaje de bienvenida:
-if ($login == 0) {
-    echo "<p>Bienvenid@, {$usuarios[$_POST['usuario']]['nombre']}</p>";
-} else {
-    if($login != -1) {
-        echo "<p style='color:red;'>{$ERROR_TYPES[$login]}</p>";
+    // Si el usuario ha accedido correctamente, mostramos el mensaje de bienvenida:
+    if ($login == 0) {
+        $nombre = $usuarios[$_POST["usuario"]]["nombre"];
+        $apellidos = $usuarios[$_POST["usuario"]]["apellidos"];
+        // Cargar la vista
+        require "ejercicio04.view.php";
+    } else {
+        // Si ha habido un error, guardamos el mensaje de error para mostrarlo en la vista.
+        $mensaje_error = $ERROR_TYPES[$login];
+        // Cargar la vista
+        require "ejercicio04login.view.php";
     }
-    mostrarFormulario();
+} else {
+    // Cargar la vista con el formulario por primera vez
+    require "ejercicio04login.view.php";
 }
-
-?>
-
-</body>
-</html>
