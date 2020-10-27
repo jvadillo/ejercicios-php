@@ -1,5 +1,6 @@
 <?php
 
+/*** FUNCIONES ***/
 function realizarOperacion($operacion, $numero1, $numero2) {
     switch ($operacion) {
         case "suma":

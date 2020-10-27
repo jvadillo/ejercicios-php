@@ -1,5 +1,6 @@
 <?php
 
+/*** FUNCIONES ***/
 function convertirTemperatura($temperatura, $unidad) {
     if($unidad == 'celsius') {
         return round(1.8 * $temperatura + 32, 2);
